@@ -1,5 +1,5 @@
 import React from 'react';
-import TitleScreen from './containers/titleScreen.js';
+import TitleScreen from './containers/TitleScreen';
 
 function App() {
   return (
