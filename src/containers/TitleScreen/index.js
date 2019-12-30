@@ -1,15 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 
 import Title from '../../components/Title';
 import Header from '../../components/Header';
-
-const Button = styled(Link)`
-  text-decoration: none;
-  cursor: pointer;
-  color: ${props => props.theme.colors.main};
-`;
+import { StyledLink } from '../../components/Button';
 
 const TitleScreen = () => {
   return (
@@ -17,9 +10,9 @@ const TitleScreen = () => {
       <Title>
         Tamago.
       </Title>
-      <Button to='/play'>
+      <StyledLink to='/play'>
         Start!
-      </Button>
+      </StyledLink>
     </Header>
   );
 }
