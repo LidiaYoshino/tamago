@@ -8,7 +8,7 @@ import Header from '../../components/Header';
 const Button = styled(Link)`
   text-decoration: none;
   cursor: pointer;
-  color: #FFF;
+  color: ${props => props.theme.colors.main};
 `;
 
 const TitleScreen = () => {
@@ -23,5 +23,13 @@ const TitleScreen = () => {
     </Header>
   );
 }
+
+TitleScreen.defaultProps = {
+  theme: {
+    colors: {
+      main: '#FFF'
+    }
+  }
+};
 
 export default TitleScreen;

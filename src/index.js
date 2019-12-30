@@ -3,15 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import PlayScreen from './containers/PlayScreen';
+import { theme } from './styles/Theme';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { ThemeProvider } from "styled-components";
 
 ReactDOM.render(
 	<BrowserRouter>
-		<Switch>
-            <Route path="/" exact={true} component={App} />
-            <Route path="/play" component={PlayScreen} />
-        </Switch>
+        <ThemeProvider theme={theme}>
+            <Switch>
+                <Route path="/" exact={true} component={App} />
+                <Route path="/play" component={PlayScreen} />
+            </Switch>
+        </ThemeProvider>
 	</ BrowserRouter>
 , document.getElementById('root'));
 
