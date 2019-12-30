@@ -15,4 +15,12 @@ const TitleScreen = () => (
   </Header>
 );
 
+TitleScreen.defaultProps = {
+  theme: {
+    colors: {
+      main: '#FFF'
+    }
+  }
+};
+
 export default TitleScreen;
