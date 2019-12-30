@@ -3,14 +3,14 @@ import React from 'react';
 import Title from '../../components/Title';
 import Header from '../../components/Header';
 
-const TestScreen = () => {
+const PlayScreen = () => {
   return (
     <Header>
       <Title>
-        Teste.
+        Play!
       </Title>
     </Header>
   );
 }
 
-export default TestScreen;
+export default PlayScreen;

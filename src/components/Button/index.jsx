@@ -6,3 +6,15 @@ export const StyledLink = styled(Link)`
   cursor: pointer;
   color: ${props => props.theme.colors.main};
 `;
+
+StyledLink.defaultProps = {
+  theme: {
+    colors: {
+      main: '#FFF'
+    }
+  }
+};
+
+export default {
+  StyledLink,
+};
