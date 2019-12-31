@@ -7,6 +7,7 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      started: false,
       health: 15,
       hapiness: {
         total: 100,
@@ -18,11 +19,13 @@ class Game extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    );
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.started === false && this.state.started === true) {
+      this.timerID = setInterval(
+        () => this.tick(),
+        1000
+      );
+    }
   }
 
   componentWillUnmount() {
@@ -39,6 +42,8 @@ class Game extends React.Component {
     }
   }
 
+  handleStart = () => this.setState({ started: true });
+
   render() {
       return (
       <BrowserRouter>
@@ -46,7 +51,7 @@ class Game extends React.Component {
             <Route
               path="/"
               exact={true}
-              component={TitleScreen}
+              component={() => <TitleScreen start={this.handleStart} />}
             />
             <Route
               path="/play"
