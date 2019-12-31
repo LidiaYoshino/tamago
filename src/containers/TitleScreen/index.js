@@ -7,7 +7,7 @@ import { StyledLink } from '../../components/Button';
 const TitleScreen = () => (
   <Header>
     <Title>
-      Tamago.
+      Tamago
     </Title>
     <StyledLink to='/play'>
       Start!
