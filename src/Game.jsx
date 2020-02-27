@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import PlayScreen from './containers/PlayScreen';
 import TitleScreen from './containers/TitleScreen';
+import Service from './services';
 
 class Game extends React.Component {
   constructor(props) {
@@ -12,11 +13,12 @@ class Game extends React.Component {
       hapiness: {
         total: 100,
         hunger: 100,
-        fun: 100,
-        hygiene: 100,
-        sleep: 100,
+        boredom: 100,
+        dirtness: 100,
+        sleepness: 100,
       }
     };
+    this.service = new Service(this.state);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -56,7 +58,7 @@ class Game extends React.Component {
             <Route
               path="/play"
               exact={true}
-              render={() => <PlayScreen health={this.state.health} />}
+              render={() => <PlayScreen health={this.state.health} hunger={this.state.hapiness.hunger} service={this.service} />}
             />
         </Switch>
       </ BrowserRouter>
