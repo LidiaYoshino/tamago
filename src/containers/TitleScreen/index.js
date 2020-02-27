@@ -4,12 +4,12 @@ import Title from '../../components/Title';
 import Header from '../../components/Header';
 import { StyledLink } from '../../components/Button';
 
-const TitleScreen = () => (
+const TitleScreen = ({ start }) => (
   <Header>
     <Title>
-      Tamago.
+      Tamago
     </Title>
-    <StyledLink to='/play'>
+    <StyledLink onClick={start} to='/play'>
       Start!
     </StyledLink>
   </Header>
