@@ -19,7 +19,7 @@ const PlayScreen = ({ health, hunger, service }) => (
       health: { health }
     </span>
     <span>
-      hunger: { service.props.hapiness.hunger }
+      hunger: { service.state.happiness.hunger }
     </span>
     { health === 0 && <button onClick={reset}>
       Restart

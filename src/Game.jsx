@@ -10,7 +10,7 @@ class Game extends React.Component {
     this.state = {
       started: false,
       health: 15,
-      hapiness: {
+      happiness: {
         total: 100,
         hunger: 100,
         boredom: 100,
@@ -58,7 +58,7 @@ class Game extends React.Component {
             <Route
               path="/play"
               exact={true}
-              render={() => <PlayScreen health={this.state.health} hunger={this.state.hapiness.hunger} service={this.service} />}
+              render={() => <PlayScreen health={this.state.health} hunger={this.state.happiness.hunger} service={this.service} />}
             />
         </Switch>
       </ BrowserRouter>
