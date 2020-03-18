@@ -7,7 +7,7 @@ const reset = () => {
   window.location.href = '/';
 }
 
-const PlayScreen = ({ health, hunger, service }) => (
+const PlayScreen = ({ health, service }) => (
   <Header>
     <Title>
       Tamago

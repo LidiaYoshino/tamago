@@ -18,7 +18,7 @@ class Game extends React.Component {
         sleepness: 100,
       }
     };
-    this.service = new Service(this.state);
+    this.service = new Service({ state: this.state, handleUpdate: this.setState.bind(this) });
   }
 
   componentDidUpdate(prevProps, prevState) {
