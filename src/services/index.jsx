@@ -1,6 +1,30 @@
 class Service {
-  constructor(props) {
-    this.props = props;
+  constructor({ state, handleUpdate, timer }) {
+    this.state = state;
+    this.handleUpdate = handleUpdate;
+    this.timer = timer || { setInterval, clearInterval };
+  }
+
+  start() {
+    this.timerID = this.timer.setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  tick() {
+    if (this.state.health > 0) {
+      this.state.health -=1;
+      this.handleUpdate({
+        health: this.state.health,
+      });
+    } else {
+      this.timer.clearInterval(this.timerID);
+    }
+  }
+
+  stop() {
+    this.timer.clearInterval(this.timerID);
   }
 
   eat() {
