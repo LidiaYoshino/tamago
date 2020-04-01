@@ -7,41 +7,18 @@ import Service from './services';
 class Game extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      started: false,
-      health: 15,
-      happiness: {
-        total: 100,
-        hunger: 100,
-        boredom: 100,
-        dirtness: 100,
-        sleepness: 100,
-      }
-    };
-    this.service = new Service({ state: this.state, handleUpdate: this.setState.bind(this) });
+    this.service = new Service({ handleUpdate: this.setState.bind(this) });
+    this.state = this.service.initState();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.started === false && this.state.started === true) {
-      this.timerID = setInterval(
-        () => this.tick(),
-        1000
-      );
+      this.service.start();
     }
   }
 
   componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
-  tick() {
-    if (this.state.health > 0) {
-      this.setState({
-        health: this.state.health - 1,
-      });
-    } else {
-      clearInterval(this.timerID);
-    }
+    this.service.stop();
   }
 
   handleStart = () => this.setState({ started: true });

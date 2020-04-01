@@ -1,13 +1,28 @@
 class Service {
   constructor({ state, handleUpdate, timer }) {
-    this.state = state;
+    this.state = state || this.initState();
     this.handleUpdate = handleUpdate;
     this.timer = timer || { setInterval, clearInterval };
   }
 
+  initState() {
+    return {
+      started: false,
+      health: 15,
+      maxHealth: 20,
+      happiness: {
+        total: 100,
+        hunger: 100,
+        boredom: 100,
+        dirtness: 100,
+        sleepness: 100,
+      }
+    }
+  }
+
   start() {
-    this.timerID = this.timer.setInterval(
-      () => this.tick(),
+    this.timerID = setInterval(
+      this.tick.bind(this),
       1000
     );
   }
@@ -32,9 +47,9 @@ class Service {
     if (hunger < 0) {
       hunger = 0
     }
+    this.state.happiness.hunger = hunger;
     this.handleUpdate({ happiness: {
       ...this.state.happiness,
-      hunger,
     }
   });
   }
