@@ -57,12 +57,14 @@ describe('Service tests', () => {
 
   describe('Health tests', () => {
     it('should decrease health over time, when there is no intereaction', () => {
+      console.log('health');
       return new Promise((resolve, reject) => {
         const state = {
           started: false,
           health: 15,
+          maxHealth: 20,
           happiness: {
-            total: 100,
+            total: 10,
             hunger: 10,
             boredom: 100,
             dirtness: 100,
@@ -82,6 +84,7 @@ describe('Service tests', () => {
 
     it('should NOT decrease health over time, when there is intereaction', () => {
       return new Promise((resolve, reject) => {
+        console.log('entrou!');
         const state = {
           started: false,
           health: 15,
@@ -95,9 +98,11 @@ describe('Service tests', () => {
           }
         };
         const handleUpdate = ({ health }) => {
+          console.log(health);
           if (health === 15) {
             return resolve();
           };
+          reject(health);
         };
         const service = new Service({ state, handleUpdate });
         service.start();
@@ -106,6 +111,54 @@ describe('Service tests', () => {
       })
     });
   });
+    describe('evaluateHappiness tests', () => {
+      it('should return -1', () => {
+        console.log('evaluate');
+        const state = {
+          started: false,
+          health: 15,
+          happiness: {
+            total: 40,
+            hunger: 10,
+            boredom: 100,
+            dirtness: 100,
+            sleepness: 100,
+          }
+        };
+        const service = new Service({ state });
+        expect(service.evaluateHappiness()).toBe(-1);
+      });
+      it('should return 0', () => {
+        const state = {
+          started: false,
+          health: 15,
+          happiness: {
+            total: 60,
+            hunger: 10,
+            boredom: 100,
+            dirtness: 100,
+            sleepness: 100,
+          }
+        };
+        const service = new Service({ state });
+        expect(service.evaluateHappiness()).toBe(0);
+      });
+      it('should return 1', () => {
+        const state = {
+          started: false,
+          health: 15,
+          happiness: {
+            total: 80,
+            hunger: 10,
+            boredom: 100,
+            dirtness: 100,
+            sleepness: 100,
+          }
+        };
+        const service = new Service({ state });
+        expect(service.evaluateHappiness()).toBe(1);
+      });
+    });
 });
 
 /*

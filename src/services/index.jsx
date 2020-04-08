@@ -3,6 +3,20 @@ class Service {
     this.state = state || this.initState();
     this.handleUpdate = handleUpdate;
     this.timer = timer || { setInterval, clearInterval };
+    this.config = {
+      DecreaseHealth: {
+        max: 50,
+        value: -1,
+      },
+      StableHealth: {
+        max: 75,
+        value: 0,
+      },
+      IncreaseHealth: {
+        max: 100,
+        value: 1,
+      }
+    };
   }
 
   initState() {
@@ -27,9 +41,19 @@ class Service {
     );
   }
 
+  evaluateHappiness() {
+    for(const [key, value] of Object.entries(this.config)) {
+      if(value.max >= this.state.happiness.total) {
+        return value.value;
+      }
+    }
+    return 0;
+  }
+
   tick() {
-    if (this.state.health > 0) {
-      this.state.health -=1;
+    const currentHealth = this.state.health + this.evaluateHappiness();
+    if (currentHealth >= 0 && currentHealth <= this.state.maxHealth) {
+      this.state.health = currentHealth;
       this.handleUpdate({
         health: this.state.health,
       });
